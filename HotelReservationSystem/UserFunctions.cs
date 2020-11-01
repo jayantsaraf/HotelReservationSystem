@@ -6,7 +6,7 @@ namespace HotelReservationSystem
 {
     public class UserFunctions
     {
-        public string[] EnterDate()
+        public static string[] EnterDate()
         {
             string[] dates = new string[] { };
             try

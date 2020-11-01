@@ -7,22 +7,25 @@ namespace HotelReservationSystem
     public class Hotel
     {
         public string mNameOfHotel;
-        public int mRegularRate;
+        public int mRegularWeekdayRate;
+        public int mRegularWeekendRate;
         /// <summary>
         /// Constructor to assign default values
         /// </summary>
         public Hotel()
         {
             this.mNameOfHotel = null;
-            this.mRegularRate = 0;
+            this.mRegularWeekdayRate = 0;
+            this.mRegularWeekendRate = 0;
         }
         /// <summary>
         /// Constructor to assign values given by user
         /// </summary>
-        public Hotel(string name, int regularRate)
+        public Hotel(string name, int regularWeekdayRate,int regularWeekendRate)
         {
             this.mNameOfHotel = name;
-            this.mRegularRate = regularRate;
+            this.mRegularWeekdayRate = regularWeekdayRate;
+            this.mRegularWeekendRate = regularWeekendRate;
         }
     }
 }
