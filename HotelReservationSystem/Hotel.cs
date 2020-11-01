@@ -6,8 +6,8 @@ namespace HotelReservationSystem
 {
     public class Hotel
     {
-        string mNameOfHotel;
-        int mRegularRate;
+        public string mNameOfHotel;
+        public int mRegularRate;
         /// <summary>
         /// Constructor to assign default values
         /// </summary>
