@@ -1,5 +1,7 @@
 using NUnit.Framework;
 using HotelReservationSystem;
+using System.Data;
+using System.Collections.Generic;
 
 namespace HotelReservationSystemTest
 {
@@ -16,8 +18,9 @@ namespace HotelReservationSystemTest
             string[] dates = new string[]{ "10/01/2001", "20/01/2001"};
             Hotel actual = miami.FindCheapestHotel();
             ////Comparing the returned values
-            Hotel expected = new Hotel("Lakewood", 110);
-            Assert.AreEqual(actual.mRegularRate, expected.mRegularRate);
+            Hotel expected = new Hotel("Lakewood", 110, 90);
+            Assert.AreEqual(actual.mRegularWeekdayRate, expected.mRegularWeekdayRate);
         }
+        
     }
 }
