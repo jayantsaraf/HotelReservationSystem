@@ -6,13 +6,15 @@ namespace HotelReservationSystem
 {
     public class UserFunctions
     {
-        public static string[] EnterDate()
+        public static DateTime[] EnterDate()
         {
-            string[] dates = new string[] { };
+            DateTime[] dates = new DateTime[2];
             try
             {
-                Console.WriteLine("Enter dates of booking (enter dates in format DD/MM/YYYY and separated by ,");
-                dates = Console.ReadLine().Split(',');
+                Console.Write("Enter starting date :");
+                dates[0] = DateTime.Parse(Console.ReadLine());
+                Console.Write("\nEnter end date :");
+                dates[1] = DateTime.Parse(Console.ReadLine());
             }
             catch
             {

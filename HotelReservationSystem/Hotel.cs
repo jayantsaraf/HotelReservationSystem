@@ -19,11 +19,22 @@ namespace HotelReservationSystem
             this.mRegularWeekendRate = 0;
         }
         /// <summary>
+        /// Assign Default Values
+        /// </summary>
+        /// <param name="hotelName"></param>
+        public Hotel(string hotelName)
+        {
+            this.mNameOfHotel = hotelName;
+            this.mRegularWeekdayRate = 0;
+            this.mRegularWeekendRate = 0;
+        }
+
+        /// <summary>
         /// Constructor to assign values given by user
         /// </summary>
-        public Hotel(string name, int regularWeekdayRate,int regularWeekendRate)
+        public Hotel(string hotelName, int regularWeekdayRate,int regularWeekendRate)
         {
-            this.mNameOfHotel = name;
+            this.mNameOfHotel = hotelName;
             this.mRegularWeekdayRate = regularWeekdayRate;
             this.mRegularWeekendRate = regularWeekendRate;
         }

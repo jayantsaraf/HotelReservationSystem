@@ -12,9 +12,9 @@ namespace HotelReservationSystem
             ////Adding Hotels in Miami
             miami.AddHotel();
             ////Show cheapest hotels for given dates
-            string[] dates = UserFunctions.EnterDate();
-            Hotel chaeapestHotel = miami.FindCheapestHotel();
-            Console.WriteLine("Cheapest Hotel : Name : {0}, Price = {1}",chaeapestHotel.mNameOfHotel,chaeapestHotel.mRegularWeekdayRate*dates.Length);
+            DateTime[] dates = UserFunctions.EnterDate();
+            miami.FindCheapestHotel(dates);
+            
         }
     }
 }
