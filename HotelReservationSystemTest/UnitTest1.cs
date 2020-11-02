@@ -41,6 +41,21 @@ namespace HotelReservationSystemTest
             List<Hotel> expected = new List<Hotel>() { new Hotel("Lakewood"), new Hotel("Bridgewood") };
             Assert.AreEqual(actual[0].mNameOfHotel, expected[0].mNameOfHotel);
         }
+        /// <summary>
+        /// Return the rating of Lakewood - 3
+        /// </summary>
+        [Test]
+        public void ShouldReturnHotelRatingWhenPassed()
+        {
+            //// Creating object of place
+            HotelFunctions miami = new HotelFunctions();
+            //// Adding hotel and finding cheapest hotel
+            List<Hotel> hotels =  miami.AddHotel();
+            ////Checking the rating
+            int actual = hotels[0].mrating;
+            int expected = 3;
+            Assert.AreEqual(expected, actual);
+        }
         
     }
 }

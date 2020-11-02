@@ -16,11 +16,20 @@ namespace HotelReservationSystem
         List<Hotel> hotels = new List<Hotel>();
         public List<Hotel> AddHotel()
         {
-            hotels.Add(new Hotel("Lakewood", 110, 90));
-            hotels.Add(new Hotel("Bridgewood", 150, 50));
-            hotels.Add(new Hotel("Ridgewood", 220, 150));
+            hotels.Add(new Hotel("Lakewood",3, 110, 90));
+            hotels.Add(new Hotel("Bridgewood",4, 150, 50));
+            hotels.Add(new Hotel("Ridgewood",5, 220, 150));
             return hotels;
-        }    
+        }
+        /// <summary>
+        /// UC2 - Fucntion to find cheapest hotel 
+        /// </summary>
+        /// <returns></returns>
+        public Hotel FindCheapestHotelWithoutWeekend()
+        {
+            hotels.OrderBy(x => x.mRegularWeekdayRate);
+            return hotels[0];
+        }
         /// <summary>
         /// Fucntion to find cheapest hotel including weekend and weekday rate
         /// </summary>
