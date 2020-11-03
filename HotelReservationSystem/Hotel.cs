@@ -22,33 +22,83 @@ namespace HotelReservationSystem
             this.mrating = 0;
         }
         /// <summary>
-        /// Assign Default Values to RegularWeekdayRate,RegularWeekendRate,Rating
+        /// Assign Default Values to RegularWeekdayRate,RegularWeekendRate,Rating assuming customer is of type regular
         /// </summary>
         /// <param name="hotelName"></param>
         public Hotel(string hotelName)
         {
             this.mNameOfHotel = hotelName;
+            if (this.mNameOfHotel == "Lakewood")
+            {
+                this.mRegularWeekdayRate = 110;
+                this.mRegularWeekendRate = 90;
+                this.mrating = 3;
+            }
+            if (this.mNameOfHotel == "Bridgewood")
+            {
+                this.mRegularWeekdayRate = 160;
+                this.mRegularWeekendRate = 60;
+                this.mrating = 3;
+            }
+            if (this.mNameOfHotel == "Ridgewood")
+            {
+                this.mRegularWeekdayRate = 220;
+                this.mRegularWeekendRate = 150;
+                this.mrating = 3;
+            }
         }
         /// <summary>
-        /// Assign Default Values to rating
+        /// Assigns values to weekend and weekday rates to hotels as per cutomer type: regular or reward
         /// </summary>
         /// <param name="hotelName"></param>
-        public Hotel(string hotelName, int weekdayRate, int weekendRate)
+        /// <param name="customerType"></param>
+        public Hotel(string hotelName, CustomerType customerType)
         {
             this.mNameOfHotel = hotelName;
-            this.mRegularWeekdayRate = weekdayRate;
-            this.mRegularWeekendRate = weekendRate;
-        }
+            if (customerType.Equals(CustomerType.regular))
+            {
+                if (this.mNameOfHotel == "Lakewood")
+                {
+                    this.mRegularWeekdayRate = 110;
+                    this.mRegularWeekendRate = 90;
+                    this.mrating = 3;
+                }
+                if (this.mNameOfHotel == "Bridgewood")
+                {
+                    this.mRegularWeekdayRate = 160;
+                    this.mRegularWeekendRate = 60;
+                    this.mrating = 3;
+                }
+                if (this.mNameOfHotel == "Ridgewood")
+                {
+                    this.mRegularWeekdayRate = 220;
+                    this.mRegularWeekendRate = 150;
+                    this.mrating = 3;
+                }
+            }
+            else
+            {
+                if (this.mNameOfHotel == "Lakewood")
+                {
+                    this.mRegularWeekdayRate = 80;
+                    this.mRegularWeekendRate = 80;
+                    this.mrating = 3;
+                }
+                if (this.mNameOfHotel == "Bridgewood")
+                {
+                    this.mRegularWeekdayRate = 110;
+                    this.mRegularWeekendRate = 50;
+                    this.mrating = 3;
+                }
+                if (this.mNameOfHotel == "Ridgewood")
+                {
+                    this.mRegularWeekdayRate = 100;
+                    this.mRegularWeekendRate = 40;
+                    this.mrating = 3;
+                }
 
-        /// <summary>
-        /// Constructor to assign values given by user
-        /// </summary>
-        public Hotel(string hotelName, int rating, int regularWeekdayRate,int regularWeekendRate)
-        {
-            this.mNameOfHotel = hotelName;
-            this.mrating = rating;
-            this.mRegularWeekdayRate = regularWeekdayRate;
-            this.mRegularWeekendRate = regularWeekendRate;
+            }
+
         }
     }
 }

@@ -10,15 +10,12 @@ namespace HotelReservationSystem
 {
     public class HotelFunctions
     {
-        /// <summary>
-        /// Adding 3 hotels of Miami
-        /// </summary>
-        List<Hotel> hotels = new List<Hotel>();
+        public List<Hotel> hotels = new List<Hotel>();
         public List<Hotel> AddHotel()
         {
-            hotels.Add(new Hotel("Lakewood",3, 110, 90));
-            hotels.Add(new Hotel("Bridgewood",4, 150, 50));
-            hotels.Add(new Hotel("Ridgewood",5, 220, 150));
+            hotels.Add(new Hotel("Lakewood"));
+            hotels.Add(new Hotel("Lakewood"));
+            hotels.Add(new Hotel("Lakewood"));
             return hotels;
         }
         /// <summary>

@@ -22,7 +22,7 @@ namespace HotelReservationSystemTest
             DateTime[] dates = new DateTime[] { Convert.ToDateTime("1/1/2010"), Convert.ToDateTime("20/1/2010") };
             Hotel actual = miami.FindCheapestHotelWithoutWeekend();
             ////Comparing the returned values
-            Hotel expected = new Hotel("Lakewood", 110, 90);
+            Hotel expected = new Hotel("Lakewood");
             Assert.AreEqual(actual.mRegularWeekdayRate, expected.mRegularWeekdayRate);
         }
         /// <summary>
@@ -87,6 +87,19 @@ namespace HotelReservationSystemTest
             ////Comparing the returned values
             Hotel expected = new Hotel("Ridgewood");
             Assert.AreEqual(actual.mNameOfHotel, expected.mNameOfHotel);
+        }
+        /// <summary>
+        /// Test will return weekday rate of reward customer for hotel Lakewood
+        /// </summary>
+        [Test]
+        public void ShouldReturnRewardCustomerRates()
+        {
+            ////Create hotel instance
+            Hotel actual = new Hotel("Lakewood",CustomerType.reward);
+            ////Creating expected hotel instance
+            int expected = 80;
+            ////Check
+            Assert.AreEqual(expected, actual.mRegularWeekdayRate);
         }
     }
 }
