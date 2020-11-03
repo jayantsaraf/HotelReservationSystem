@@ -35,11 +35,11 @@ namespace HotelReservationSystemTest
             HotelFunctions miami = new HotelFunctions();
             //// Adding hotel and finding cheapest hotel
             miami.AddHotel();
-            DateTime[] dates = new DateTime[] {Convert.ToDateTime( "1/1/2010"), Convert.ToDateTime("20/1/2010") };
-            List<Hotel> actual = miami.FindCheapestHotel(dates);
+            DateTime[] dates = new DateTime[] {Convert.ToDateTime( "11/09/2020"), Convert.ToDateTime("12/09/2020") };
+            Hotel actual = miami.FindCheapestHotel(dates);
             ////Comparing the returned values
             List<Hotel> expected = new List<Hotel>() { new Hotel("Lakewood"), new Hotel("Bridgewood") };
-            Assert.AreEqual(actual[0].mNameOfHotel, expected[0].mNameOfHotel);
+            Assert.AreEqual(actual.mNameOfHotel, expected[0].mNameOfHotel);
         }
         /// <summary>
         /// Return the rating of Lakewood - 3
@@ -56,6 +56,21 @@ namespace HotelReservationSystemTest
             int expected = 3;
             Assert.AreEqual(expected, actual);
         }
-        
+        /// <summary>
+        /// Finding cheapest hotel with best rating
+        /// </summary>
+        [Test]
+        public void ShouldReturnCheapestHotelWithBestRating()
+        {
+            //// Creating object of place
+            HotelFunctions miami = new HotelFunctions();
+            //// Adding hotel and finding cheapest hotel
+            miami.AddHotel();
+            DateTime[] dates = new DateTime[] { Convert.ToDateTime("11/09/2020"), Convert.ToDateTime("12/09/2020") };
+            var actual = miami.FindCheapestHotel(dates);
+            ////Comparing the returned values
+            Hotel expected = new Hotel("Bridgewood");
+            Assert.AreEqual(actual.mNameOfHotel, expected.mNameOfHotel);
+        }
     }
 }

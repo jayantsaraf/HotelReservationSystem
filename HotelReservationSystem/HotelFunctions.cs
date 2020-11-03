@@ -34,7 +34,7 @@ namespace HotelReservationSystem
         /// Fucntion to find cheapest hotel including weekend and weekday rate
         /// </summary>
         /// <returns></returns>
-        public List<Hotel> FindCheapestHotel(DateTime[] dates)
+        public Hotel FindCheapestHotel(DateTime[] dates)
         {
             double noOfWeekend = 0;
             double cheapestPrice = 0;
@@ -46,11 +46,12 @@ namespace HotelReservationSystem
                     noOfWeekend++;
             }
             TimeSpan timeSpan = dates[1].Subtract(dates[0]); //// Total days between start and end date
-            noOfWeekday = timeSpan.TotalDays - noOfWeekend; //// TotalDays - inbuilt function
+            noOfWeekday = timeSpan.TotalDays - noOfWeekend + 1 ; //// TotalDays - inbuilt function
+            cheapestPrice = hotels[0].mRegularWeekdayRate * noOfWeekday + hotels[0].mRegularWeekendRate * noOfWeekend;
             foreach(var hotel in hotels)
             {
                 double priceDuringStay = hotel.mRegularWeekdayRate * noOfWeekday + hotel.mRegularWeekendRate * noOfWeekend;
-                if (priceDuringStay >= cheapestPrice)
+                if (priceDuringStay <= cheapestPrice)
                 {
                     cheapestPrice = priceDuringStay;
                     cheapestHotels.Add(hotel);
@@ -59,8 +60,8 @@ namespace HotelReservationSystem
             }
             foreach(var cheapestHotel in cheapestHotels)
                 Console.WriteLine("Cheapest Hotel : Name : {0}, Price = {1}", cheapestHotel.mNameOfHotel, cheapestPrice);
-
-            return cheapestHotels;
+            var sortedCheapestHotelsAsPerRating = cheapestHotels.OrderByDescending(x => x.mrating).ToList(); //// Sorts the cheapest hotels as per the rating in descending order
+            return sortedCheapestHotelsAsPerRating[0];
         }
     }
 }

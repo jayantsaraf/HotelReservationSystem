@@ -7,6 +7,7 @@ namespace HotelReservationSystem
     {
         static void Main(string[] args)
         {
+            
             Console.WriteLine("Welcome to Hotel Reservation System");
             HotelFunctions miami = new HotelFunctions();
             ////Adding Hotels in Miami
