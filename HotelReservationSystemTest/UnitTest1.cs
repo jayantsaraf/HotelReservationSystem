@@ -72,5 +72,21 @@ namespace HotelReservationSystemTest
             Hotel expected = new Hotel("Bridgewood");
             Assert.AreEqual(actual.mNameOfHotel, expected.mNameOfHotel);
         }
+        /// <summary>
+        /// Finding hotel with best rating
+        /// </summary>
+        [Test]
+        public void ShouldReturnHotelWithBestRating()
+        {
+            //// Creating object of place
+            HotelFunctions miami = new HotelFunctions();
+            //// Adding hotel and finding cheapest hotel
+            miami.AddHotel();
+            DateTime[] dates = new DateTime[] { Convert.ToDateTime("11/09/2020"), Convert.ToDateTime("12/09/2020") };
+            var actual = miami.FindBestHotel(dates);
+            ////Comparing the returned values
+            Hotel expected = new Hotel("Ridgewood");
+            Assert.AreEqual(actual.mNameOfHotel, expected.mNameOfHotel);
+        }
     }
 }

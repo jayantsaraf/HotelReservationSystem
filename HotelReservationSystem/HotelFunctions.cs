@@ -31,37 +31,54 @@ namespace HotelReservationSystem
             return hotels[0];
         }
         /// <summary>
-        /// Fucntion to find cheapest hotel including weekend and weekday rate
+        /// Calculates price of all hotels during given date range
         /// </summary>
+        /// <param name="dates"></param>
         /// <returns></returns>
-        public Hotel FindCheapestHotel(DateTime[] dates)
+        public Dictionary<Hotel, double> CalculatePriceOfStay(DateTime[] dates)
         {
             double noOfWeekend = 0;
-            double cheapestPrice = 0;
             double noOfWeekday = 0;
-            List<Hotel> cheapestHotels = new List<Hotel>();
+            Dictionary<Hotel, double> listOfHotelAndPrice = new Dictionary<Hotel, double>();
             foreach (var date in dates)
             {
                 if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
                     noOfWeekend++;
             }
             TimeSpan timeSpan = dates[1].Subtract(dates[0]); //// Total days between start and end date
-            noOfWeekday = timeSpan.TotalDays - noOfWeekend + 1 ; //// TotalDays - inbuilt function
-            cheapestPrice = hotels[0].mRegularWeekdayRate * noOfWeekday + hotels[0].mRegularWeekendRate * noOfWeekend;
-            foreach(var hotel in hotels)
+            noOfWeekday = timeSpan.TotalDays - noOfWeekend + 1; //// TotalDays - inbuilt function
+            foreach (var hotel in hotels)
             {
                 double priceDuringStay = hotel.mRegularWeekdayRate * noOfWeekday + hotel.mRegularWeekendRate * noOfWeekend;
-                if (priceDuringStay <= cheapestPrice)
-                {
-                    cheapestPrice = priceDuringStay;
-                    cheapestHotels.Add(hotel);
-                }
-                    
+                listOfHotelAndPrice.Add(hotel, priceDuringStay);
             }
-            foreach(var cheapestHotel in cheapestHotels)
-                Console.WriteLine("Cheapest Hotel : Name : {0}, Price = {1}", cheapestHotel.mNameOfHotel, cheapestPrice);
-            var sortedCheapestHotelsAsPerRating = cheapestHotels.OrderByDescending(x => x.mrating).ToList(); //// Sorts the cheapest hotels as per the rating in descending order
-            return sortedCheapestHotelsAsPerRating[0];
+            return listOfHotelAndPrice;
         }
+        /// <summary>
+        /// Fucntion to find cheapest hotel including weekend and weekday rate
+        /// </summary>
+        /// <returns></returns>
+        public Hotel FindCheapestHotel(DateTime[] dates)
+        {
+            Dictionary<Hotel, double> listOfHotelAndPriceDuringGivenDate = CalculatePriceOfStay(dates);
+            var sortedListOfHotelAndPriceDuringGivenDate = listOfHotelAndPriceDuringGivenDate.OrderBy(x => x.Value).ThenByDescending(x=>x.Key.mrating);//// Sorts the cheapest hotels as per the rating in descending order
+            foreach (var hotel in sortedListOfHotelAndPriceDuringGivenDate)
+                Console.WriteLine("Cheapest Hotel : Name : {0}, Price = {1}", hotel.Key, hotel.Value);
+            return sortedListOfHotelAndPriceDuringGivenDate.ElementAt(0).Key;
+        }
+        /// <summary>
+        /// Finds the hotel with best rating
+        /// </summary>
+        /// <param name="dates"></param>
+        public Hotel FindBestHotel(DateTime[] dates)
+        {
+            Dictionary<Hotel, double> listOfHotelAndPriceDuringGivenDate = CalculatePriceOfStay(dates);
+            ////sorts the hotels as per rating with first hotel being with best rating
+            var sortedListOfHotelAndPriceDuringGivenDate = listOfHotelAndPriceDuringGivenDate.OrderByDescending(x => x.Key.mrating);
+            return sortedListOfHotelAndPriceDuringGivenDate.ElementAt(0).Key;
+        }
+
+
+        
     }
 }
