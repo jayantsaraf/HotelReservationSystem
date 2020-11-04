@@ -4,11 +4,14 @@ using System.Data;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System;
+using System.Globalization;
 
 namespace HotelReservationSystemTest
 {
     public class Tests
     {
+
+        CultureInfo cultureinfo = CultureInfo.InvariantCulture;
         /// <summary>
         /// Finding cheapest hotel
         /// </summary>
@@ -19,7 +22,7 @@ namespace HotelReservationSystemTest
             HotelFunctions miami = new HotelFunctions();
             //// Adding hotel and finding cheapest hotel
             miami.AddHotel();
-            DateTime[] dates = new DateTime[] { Convert.ToDateTime("1/1/2010"), Convert.ToDateTime("20/1/2010") };
+            DateTime[] dates = new DateTime[] { Convert.ToDateTime("11/09/2020"), Convert.ToDateTime("12/09/2020") };
             Hotel actual = miami.FindCheapestHotelWithoutWeekend();
             ////Comparing the returned values
             Hotel expected = new Hotel("Lakewood");
@@ -34,8 +37,8 @@ namespace HotelReservationSystemTest
             //// Creating object of place
             HotelFunctions miami = new HotelFunctions();
             //// Adding hotel and finding cheapest hotel
-            miami.AddHotel();
-            DateTime[] dates = new DateTime[] {Convert.ToDateTime( "11/09/2020"), Convert.ToDateTime("12/09/2020") };
+            miami.AddHotel();        
+            DateTime[] dates = new DateTime[] {Convert.ToDateTime( "11/09/2020",cultureinfo), Convert.ToDateTime("12/09/2020",cultureinfo) };
             Hotel actual = miami.FindCheapestHotel(dates);
             ////Comparing the returned values
             List<Hotel> expected = new List<Hotel>() { new Hotel("Lakewood"), new Hotel("Bridgewood") };
@@ -66,11 +69,11 @@ namespace HotelReservationSystemTest
             HotelFunctions miami = new HotelFunctions();
             //// Adding hotel and finding cheapest hotel
             miami.AddHotel();
-            DateTime[] dates = new DateTime[] { Convert.ToDateTime("11/09/2020"), Convert.ToDateTime("12/09/2020") };
+            DateTime[] dates = new DateTime[] { Convert.ToDateTime("09/11/2020",cultureinfo), Convert.ToDateTime("09/12/2020",cultureinfo) };
             var actual = miami.FindCheapestHotel(dates);
             ////Comparing the returned values
-            Hotel expected = new Hotel("Bridgewood");
-            Assert.AreEqual(actual.mNameOfHotel, expected.mNameOfHotel);
+            string expected = "Bridgewood";
+            Assert.AreEqual(expected,actual.mNameOfHotel);
         }
         /// <summary>
         /// Finding hotel with best rating
@@ -101,5 +104,22 @@ namespace HotelReservationSystemTest
             ////Check
             Assert.AreEqual(expected, actual.mRegularWeekdayRate);
         }
+        /// <summary>
+        /// Finding cheapest hotel with best rating for reward customer
+        /// </summary>
+        [Test]
+        public void ShouldReturnCheapestHotelWithBestRatingForRewardCustomer()
+        {
+            //// Creating object of place
+            HotelFunctions miami = new HotelFunctions();
+            //// Adding hotel and finding cheapest hotel
+            miami.AddHotel(CustomerType.reward);
+            DateTime[] dates = new DateTime[] { Convert.ToDateTime("09/11/2020", cultureinfo), Convert.ToDateTime("09/12/2020", cultureinfo) };
+            var actual = miami.FindCheapestHotel(dates);
+            ////Comparing the returned values
+            string expected = "Ridgewood";
+            Assert.AreEqual(expected, actual.mNameOfHotel);
+        }
+
     }
 }

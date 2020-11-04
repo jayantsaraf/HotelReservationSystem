@@ -14,8 +14,20 @@ namespace HotelReservationSystem
         public List<Hotel> AddHotel()
         {
             hotels.Add(new Hotel("Lakewood"));
-            hotels.Add(new Hotel("Lakewood"));
-            hotels.Add(new Hotel("Lakewood"));
+            hotels.Add(new Hotel("Bridgewood"));
+            hotels.Add(new Hotel("Ridgewood"));
+            return hotels;
+        }
+        public List<Hotel> AddHotel(CustomerType customerType)
+        {
+            if (customerType.Equals(CustomerType.reward))
+            {
+                hotels.Add(new Hotel("Lakewood", CustomerType.reward));
+                hotels.Add(new Hotel("Bridgewood", CustomerType.reward));
+                hotels.Add(new Hotel("Ridgewood", CustomerType.reward));
+            }
+            else
+                AddHotel();
             return hotels;
         }
         /// <summary>
@@ -58,7 +70,7 @@ namespace HotelReservationSystem
         public Hotel FindCheapestHotel(DateTime[] dates)
         {
             Dictionary<Hotel, double> listOfHotelAndPriceDuringGivenDate = CalculatePriceOfStay(dates);
-            var sortedListOfHotelAndPriceDuringGivenDate = listOfHotelAndPriceDuringGivenDate.OrderBy(x => x.Value).ThenByDescending(x=>x.Key.mrating);//// Sorts the cheapest hotels as per the rating in descending order
+            var sortedListOfHotelAndPriceDuringGivenDate = listOfHotelAndPriceDuringGivenDate.OrderBy(x => x.Value).ThenByDescending(x => x.Key.mrating);//// Sorts the cheapest hotels as per the rating in descending order
             foreach (var hotel in sortedListOfHotelAndPriceDuringGivenDate)
                 Console.WriteLine("Cheapest Hotel : Name : {0}, Price = {1}", hotel.Key, hotel.Value);
             return sortedListOfHotelAndPriceDuringGivenDate.ElementAt(0).Key;
