@@ -38,13 +38,13 @@ namespace HotelReservationSystem
             {
                 this.mRegularWeekdayRate = 160;
                 this.mRegularWeekendRate = 60;
-                this.mrating = 3;
+                this.mrating = 4;
             }
             if (this.mNameOfHotel == "Ridgewood")
             {
                 this.mRegularWeekdayRate = 220;
                 this.mRegularWeekendRate = 150;
-                this.mrating = 3;
+                this.mrating = 5;
             }
         }
         /// <summary>
@@ -67,13 +67,13 @@ namespace HotelReservationSystem
                 {
                     this.mRegularWeekdayRate = 160;
                     this.mRegularWeekendRate = 60;
-                    this.mrating = 3;
+                    this.mrating = 4;
                 }
                 if (this.mNameOfHotel == "Ridgewood")
                 {
                     this.mRegularWeekdayRate = 220;
                     this.mRegularWeekendRate = 150;
-                    this.mrating = 3;
+                    this.mrating = 5;
                 }
             }
             else
@@ -88,13 +88,13 @@ namespace HotelReservationSystem
                 {
                     this.mRegularWeekdayRate = 110;
                     this.mRegularWeekendRate = 50;
-                    this.mrating = 3;
+                    this.mrating = 4;
                 }
                 if (this.mNameOfHotel == "Ridgewood")
                 {
                     this.mRegularWeekdayRate = 100;
                     this.mRegularWeekendRate = 40;
-                    this.mrating = 3;
+                    this.mrating = 5;
                 }
 
             }
