@@ -29,6 +29,46 @@ namespace HotelReservationSystemTest
             Assert.AreEqual(actual.mRegularWeekdayRate, expected.mRegularWeekdayRate);
         }
         /// <summary>
+        /// Return null exception
+        /// </summary>
+        [Test]
+        public void ShouldReturnNullExceptuonWhenCallingCheapestHotelFunction()
+        {
+            try
+            {
+                //// Creating object of place
+                HotelFunctions miami = new HotelFunctions();
+                //// Adding hotel and finding cheapest hotel
+                miami.AddHotel();
+                DateTime[] dates = null;
+                Hotel actual = miami.FindCheapestHotel(dates);
+            }
+            catch (HotelManagementCustomException e)
+            {
+                Assert.AreEqual("Dates entered cannot be null", e.Message);
+            }
+        }
+        /// <summary>
+        /// Return empty string error
+        /// </summary>
+        [Test]
+        public void ShouldReturnExptyExceptuonWhenCallingCheapestHotelFunction()
+        {
+            try
+            {
+                //// Creating object of place
+                HotelFunctions miami = new HotelFunctions();
+                //// Adding hotel and finding cheapest hotel
+                miami.AddHotel();
+                DateTime[] dates = new DateTime[] { };
+                Hotel actual = miami.FindCheapestHotel(dates);
+            }
+            catch (HotelManagementCustomException e)
+            {
+                Assert.AreEqual("Date range cannot be empty", e.Message);
+            }
+        }
+        /// <summary>
         /// Finding cheapest hotel including weekend and weekday
         /// </summary>
         [Test]
@@ -44,6 +84,7 @@ namespace HotelReservationSystemTest
             List<Hotel> expected = new List<Hotel>() { new Hotel("Lakewood"), new Hotel("Bridgewood") };
             Assert.AreEqual(actual.mNameOfHotel, expected[0].mNameOfHotel);
         }
+        
         /// <summary>
         /// Return the rating of Lakewood - 3
         /// </summary>

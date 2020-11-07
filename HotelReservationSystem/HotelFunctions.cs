@@ -46,12 +46,13 @@ namespace HotelReservationSystem
         /// <returns></returns>
         public Dictionary<Hotel, double> CalculatePriceOfStay(DateTime[] dates)
         {
+            Dictionary<Hotel, double> listOfHotelAndPrice = new Dictionary<Hotel, double>();
+
             double noOfWeekend = 0;
             double noOfWeekday = 0;
-            Dictionary<Hotel, double> listOfHotelAndPrice = new Dictionary<Hotel, double>();
-            foreach (var date in dates)
+            for (DateTime i = dates[0]; i < dates[1]; i = i.AddDays(1))
             {
-                if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
+                if (i.DayOfWeek == DayOfWeek.Saturday || i.DayOfWeek == DayOfWeek.Sunday)
                     noOfWeekend++;
             }
             TimeSpan timeSpan = dates[1].Subtract(dates[0]); //// Total days between start and end date
@@ -61,6 +62,7 @@ namespace HotelReservationSystem
                 double priceDuringStay = hotel.mRegularWeekdayRate * noOfWeekday + hotel.mRegularWeekendRate * noOfWeekend;
                 listOfHotelAndPrice.Add(hotel, priceDuringStay);
             }
+
             return listOfHotelAndPrice;
         }
         /// <summary>
@@ -69,10 +71,18 @@ namespace HotelReservationSystem
         /// <returns></returns>
         public Hotel FindCheapestHotel(DateTime[] dates)
         {
-            Dictionary<Hotel, double> listOfHotelAndPriceDuringGivenDate = CalculatePriceOfStay(dates);
-            var sortedListOfHotelAndPriceDuringGivenDate = listOfHotelAndPriceDuringGivenDate.OrderBy(x => x.Value).ThenByDescending(x => x.Key.mrating);//// Sorts the cheapest hotels as per the rating in descending order
-            foreach (var hotel in sortedListOfHotelAndPriceDuringGivenDate)
-                Console.WriteLine("Cheapest Hotel : Name : {0}, Price = {1}", hotel.Key, hotel.Value);
+            Dictionary<Hotel, double> sortedListOfHotelAndPriceDuringGivenDate = new Dictionary<Hotel, double>();
+            if (dates == null)
+                throw new HotelManagementCustomException(HotelManagementCustomException.ExceptionType.NULL_MESSAGE, "Dates entered cannot be null");
+            else if (dates.Length == 0)
+                throw new HotelManagementCustomException(HotelManagementCustomException.ExceptionType.EMPTY_MESSAGE, "Date range cannot be empty");
+            else
+            {
+                Dictionary<Hotel, double> listOfHotelAndPriceDuringGivenDate = CalculatePriceOfStay(dates);
+                sortedListOfHotelAndPriceDuringGivenDate = (Dictionary<Hotel, double>)listOfHotelAndPriceDuringGivenDate.OrderBy(x => x.Value).ThenByDescending(x => x.Key.mrating);//// Sorts the cheapest hotels as per the rating in descending order
+                foreach (var hotel in sortedListOfHotelAndPriceDuringGivenDate)
+                    Console.WriteLine("Cheapest Hotel : Name : {0}, Price = {1}", hotel.Key, hotel.Value);
+            }
             return sortedListOfHotelAndPriceDuringGivenDate.ElementAt(0).Key;
         }
         /// <summary>
@@ -88,6 +98,6 @@ namespace HotelReservationSystem
         }
 
 
-        
+
     }
 }
